@@ -25,6 +25,42 @@ function startTimer() {
         }
 
     }, 1000);
+
+    var imgArray = [];
+    var max = 12;
+    
+    for (i = 0; i < (max / 2); i++) {
+        imgArray[i] = new Image();
+        if (i == 5)
+            imgArray[i].src = 'images/frontCard' + (i + 1) + '.png';
+        else
+            imgArray[i].src = 'images/frontCard' + (i + 1) + '.jpg';
+    }
+    
+    function shuffle(array) {
+        var currentIndex = array.length,
+            temporaryValue, randomIndex;
+    
+        while (0 !== currentIndex) {
+    
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+    
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+        }
+        return array;
+    }
+    
+    var randomArray = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5];
+    randomArray = shuffle(randomArray);
+    
+    for (i = 0; i < max; i++) {
+        document.getElementById("image" + i).src = imgArray[randomArray[i]].src;
+    }
+
+
 }
 
 document.getElementById("play").onclick = startTimer;
@@ -51,7 +87,7 @@ $(".card").click(function() {
 
             points++;
 
-            // const openCards = document.querySelectorAll(".cardOpen");
+            // let openCards = document.querySelectorAll(".cardOpen");
             // openCards.classList.add('correct');
             $('.cardOpen').addClass('correct');
 
